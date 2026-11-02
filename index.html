@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D Núñez Motors | E-Commerce & Alquiler de Vehículos</title>
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- FontAwesome 6.5.1 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- html2pdf.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Sticky Glassmorphism Navbar con fondo ultra oscuro y blur -->
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top glass-navbar">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+        <i class="fa-solid fa-crown text-warning fs-4"></i>
+        <span class="fw-extrabold tracking-wider text-gradient">D NÚÑEZ MOTORS</span>
+      </a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4 gap-lg-2">
+          <li class="nav-item">
+            <a class="nav-link active fw-semibold" href="#" onclick="filterCatalog('todos')"><i class="fa-solid fa-th-large me-1"></i> Todo el Catálogo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fw-semibold" href="#" onclick="filterCatalog('vehiculos')"><i class="fa-solid fa-car me-1"></i> Vehículos de Lujo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fw-semibold" href="#" onclick="filterCatalog('motos')"><i class="fa-solid fa-motorcycle me-1"></i> Super Motos</a>
+          </li>
+        </ul>
+        <div class="d-flex align-items-center gap-3">
+          <div class="search-box position-relative">
+            <input type="text" id="searchInput" class="form-control form-control-sm rounded-pill ps-4 pe-3 bg-dark text-light border-secondary" placeholder="Buscar marca o modelo..." oninput="handleSearch(this.value)">
+            <i class="fa-solid fa-magnifying-glass position-absolute top-50 start-0 translate-middle-y ms-3 text-muted small"></i>
+          </div>
+          <button class="btn btn-warning btn-sm rounded-pill px-3 fw-bold d-flex align-items-center gap-2 shadow-sm" data-bs-toggle="modal" data-bs-target="#cartModal">
+            <i class="fa-solid fa-cart-shopping"></i> Carrito <span id="cartBadge" class="badge bg-danger rounded-pill">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Banner -->
+  <header class="hero-banner py-5 position-relative overflow-hidden">
+    <div class="container py-4 position-relative z-1">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-7">
+          <div class="badge bg-warning bg-opacity-10 text-warning border border-warning border-opacity-25 px-3 py-2 rounded-pill mb-3 fw-semibold">
+            <i class="fa-solid fa-bolt me-1"></i> D Núñez Motors Cyber Gold V5.2
+          </div>
+          <h1 class="display-4 fw-black text-white mb-3 lh-tight">
+            CATÁLOGO <span class="text-gradient">ROYAL</span> & <br>ALQUILER DE ÉLITE
+          </h1>
+          <p class="lead text-muted mb-4 fs-6">
+            Adquiera superdeportivos de edición limitada o alquile flotas de alta gama con contratos digitales inmediatos, fianza reembolsable y respaldo corporativo total.
+          </p>
+          <div class="d-flex flex-wrap gap-3">
+            <button class="btn btn-warning btn-lg rounded-pill px-4 fw-bold shadow" onclick="scrollToCatalog()">
+              <i class="fa-solid fa-compass me-2"></i> Explorar Catálogo
+            </button>
+            <button class="btn btn-outline-light btn-lg rounded-pill px-4 fw-semibold" data-bs-toggle="modal" data-bs-target="#checkoutModal">
+              <i class="fa-solid fa-shield-halved me-2"></i> Pasarela VIP Segura
+            </button>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="profile-card p-4 rounded-4 shadow-lg border border-secondary border-opacity-25 text-center position-relative">
+            <div class="position-absolute top-0 end-0 translate-middle badge rounded-pill bg-success p-2 border border-dark">
+              <i class="fa-solid fa-check fs-6"></i>
+            </div>
+            <img src="https://avatars.githubusercontent.com/u/236252703?s=400&u=31592a88c488cc946ab49d1dd504a1246a78f45a&v=4" class="profile-avatar mb-3 shadow" alt="Manuel A. Núñez R.">
+            <h5 class="fw-bold text-white mb-1">🌐 MIS REDES SOCIALES Y CONTACTO</h5>
+            <p class="text-muted small mb-3">Ing. Manuel A. Núñez R. | Amante de la Tecnología & Creador de Páginas Web</p>
+            <div class="social-icons-hero d-flex justify-content-center gap-3 fs-5">
+              <a href="https://www.linkedin.com/in/manuel-nu%C3%B1ez-5a5aa5350/?isSelfProfile=true" target="_blank" title="LinkedIn" class="text-warning"><i class="fab fa-linkedin-in"></i></a>
+              <a href="https://www.youtube.com/@manuelnunez4778" target="_blank" title="YouTube" class="text-danger"><i class="fab fa-youtube"></i></a>
+              <a href="https://github.com/thublankitohd-rgb" target="_blank" title="GitHub" class="text-light"><i class="fab fa-github"></i></a>
+              <a href="https://wa.me/18097758647" target="_blank" title="WhatsApp" class="text-success"><i class="fab fa-whatsapp"></i></a>
+              <a href="https://www.instagram.com/manuel_nunez0405/" target="_blank" title="Instagram" class="text-pink"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.facebook.com/manuel.nunez.203751/" target="_blank" title="Facebook" class="text-primary"><i class="fab fa-facebook-f"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Catalog Section -->
+  <main class="container my-5" id="catalogSection">
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+      <div>
+        <h3 class="fw-bold text-white m-0"><i class="fa-solid fa-car-side text-warning me-2"></i> Unidades Disponibles</h3>
+        <p class="text-muted small m-0">Seleccione compra definitiva o alquiler corporativo con contratos oficiales.</p>
+      </div>
+      <div class="btn-group bg-dark p-1 rounded-pill border border-secondary" role="group">
+        <button type="button" class="btn btn-sm btn-warning rounded-pill px-3 fw-bold" onclick="filterCatalog('todos')" id="btnAll">Todos</button>
+        <button type="button" class="btn btn-sm btn-outline-light rounded-pill px-3" onclick="filterCatalog('vehiculos')" id="btnVehicles">Autos</button>
+        <button type="button" class="btn btn-sm btn-outline-light rounded-pill px-3" onclick="filterCatalog('motos')" id="btnMotos">Motos</button>
+      </div>
+    </div>
+
+    <!-- Product Grid Container -->
+    <div class="row g-4" id="catalogGrid">
+      <!-- Inyectado dinámicamente por JS -->
+    </div>
+  </main>
+
+  <!-- Modal Alquiler / Renta -->
+  <div class="modal fade" id="rentalModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark border border-secondary text-light">
+        <div class="modal-header border-secondary">
+          <h5 class="modal-title fw-bold text-warning"><i class="fa-solid fa-key me-2"></i> Configurar Alquiler VIP</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="rentalModalBody"></div>
+        <div class="modal-footer border-secondary">
+          <button type="button" class="btn btn-outline-light btn-sm rounded-pill px-3" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-warning btn-sm rounded-pill px-4 fw-bold" id="confirmRentalBtn">Confirmar y Agregar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Carrito -->
+  <div class="modal fade" id="cartModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content bg-dark border border-secondary text-light">
+        <div class="modal-header border-secondary">
+          <h5 class="modal-title fw-bold text-warning"><i class="fa-solid fa-cart-shopping me-2"></i> Tu Carrito & Contratos</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div id="cartItemsList" class="mb-3"></div>
+          <div class="p-3 rounded bg-secondary bg-opacity-10 border border-secondary border-opacity-25">
+            <div class="d-flex justify-content-between mb-1"><span>Subtotal:</span><span id="cartSubtotal">$0.00 USD</span></div>
+            <div class="d-flex justify-content-between mb-1"><span>ITBIS (18%):</span><span id="cartTax">$0.00 USD</span></div>
+            <div class="d-flex justify-content-between mb-1"><span>Fianza Reembolsable:</span><span id="cartDeposit">$0.00 USD</span></div>
+            <hr class="border-secondary">
+            <div class="d-flex justify-content-between fw-bold fs-5 text-warning"><span>Total General:</span><span id="cartTotal">$0.00 USD</span></div>
+          </div>
+        </div>
+        <div class="modal-footer border-secondary">
+          <button type="button" class="btn btn-outline-danger btn-sm rounded-pill px-3" onclick="clearCart()">Vaciar Carrito</button>
+          <button type="button" class="btn btn-warning btn-sm rounded-pill px-4 fw-bold" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#checkoutModal">Proceder al Pago & PDF</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Checkout / Pasarela de Pago -->
+  <div class="modal fade" id="checkoutModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content bg-dark border border-secondary text-light">
+        <div class="modal-header border-secondary">
+          <h5 class="modal-title fw-bold text-warning"><i class="fa-solid fa-credit-card me-2"></i> Pasarela de Pago & Datos Oficiales</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-warning bg-warning bg-opacity-10 border border-warning border-opacity-25 text-warning small d-flex justify-content-between align-items-center mb-3">
+            <span><i class="fa-solid fa-shield-check me-2"></i> Transacción Cifrada y Blindada / Datos precargados automáticamente.</span>
+            <button class="btn btn-sm btn-warning fw-bold py-0 px-2" onclick="fillMockData()">⚡ Rellenar Demo VIP</button>
+          </div>
+          <form id="checkoutForm">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label small text-muted">Nombre y Apellidos</label>
+                <input type="text" id="clientName" class="form-control form-control-sm bg-dark text-light border-secondary" value="Ing. Manuel A. Núñez R." required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small text-muted">Documento / Cédula</label>
+                <input type="text" id="clientId" class="form-control form-control-sm bg-dark text-light border-secondary" value="001-1234567-8" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small text-muted">Licencia de Conducir</label>
+                <input type="text" id="clientLicense" class="form-control form-control-sm bg-dark text-light border-secondary" value="DO-8874125-VIP (Vigente)" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small text-muted">Teléfono</label>
+                <input type="text" id="clientPhone" class="form-control form-control-sm bg-dark text-light border-secondary" value="+1 (809) 555-0199" required>
+              </div>
+              <div class="col-12">
+                <label class="form-label small text-muted">Correo Electrónico</label>
+                <input type="email" id="clientEmail" class="form-control form-control-sm bg-dark text-light border-secondary" value="manuelnunezrossis@hotmail.com" required>
+              </div>
+              <div class="col-12">
+                <label class="form-label small text-muted">Dirección de Entrega</label>
+                <input type="text" id="clientAddress" class="form-control form-control-sm bg-dark text-light border-secondary" value="c. Proyecto 14, Las Palmas de Herrera, Santo Domingo, D.N." required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small text-muted">Número de Tarjeta Simulada</label>
+                <input type="text" id="cardNum" class="form-control form-control-sm bg-dark text-light border-secondary" value="4532 8901 2345 8899" required>
+              </div>
+              <div class="col-md-3">
+                <label class="form-label small text-muted">Vencimiento</label>
+                <input type="text" id="cardExp" class="form-control form-control-sm bg-dark text-light border-secondary" value="12/28" required>
+              </div>
+              <div class="col-md-3">
+                <label class="form-label small text-muted">CVV</label>
+                <input type="text" id="cardCvv" class="form-control form-control-sm bg-dark text-light border-secondary" value="789" required>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer border-secondary">
+          <button type="button" class="btn btn-outline-light btn-sm rounded-pill px-3" data-bs-dismiss="modal">Regresar</button>
+          <button type="button" class="btn btn-warning btn-sm rounded-pill px-4 fw-bold" onclick="processCheckoutAndGeneratePDF()">
+            <i class="fa-solid fa-file-pdf me-2"></i> Procesar & Descargar PDF Oficial
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botones Flotantes (Carrito y Volver Arriba) -->
+  <div class="position-fixed bottom-0 end-0 m-4 d-flex flex-column gap-2" style="z-index: 1050;">
+    <!-- Botón Flotante Carrito -->
+    <button class="btn btn-info rounded-circle shadow-lg d-flex align-items-center justify-content-center text-dark fw-bold position-relative" style="width: 50px; height: 50px;" data-bs-toggle="modal" data-bs-target="#cartModal" title="Ver Carrito">
+      <i class="fa-solid fa-cart-shopping fs-5"></i>
+      <span id="floatingCartBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 10px;">0</span>
+    </button>
+    <!-- Botón Flotante Volver Arriba -->
+    <button id="backToTopBtn" class="btn btn-warning rounded-circle shadow-lg d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; display: none !important;" onclick="scrollToTop()" title="Volver Arriba">
+      <i class="fa-solid fa-arrow-up text-dark fs-5"></i>
+    </button>
+  </div>
+
+  <!-- Footer Maestro -->
+  <footer>
+    <div class="container">
+      <img src="https://avatars.githubusercontent.com/u/236252703?s=400&u=31592a88c488cc946ab49d1dd504a1246a78f45a&v=4" class="footer-avatar" alt="Ing. Manuel A. Núñez R.">
+      <h4>Ing. Manuel A. Núñez R.</h4>
+      <p class="bio">
+        Soy amante a la tecnología, desarrollador de páginas web y apasionado por crear soluciones digitales innovadoras, interactivas y de alta calidad.
+      </p>
+      
+      <div class="mb-4">
+        <span class="tech-stack"><i class="fab fa-html5" style="color: #e34f26;"></i> HTML</span>
+        <span class="tech-stack"><i class="fab fa-css3-alt" style="color: #1572b6;"></i> CSS</span>
+        <span class="tech-stack"><i class="fab fa-js" style="color: #f7df1e;"></i> JS</span>
+      </div>
+
+      <div class="social-icons-footer">
+        <a href="https://www.linkedin.com/in/manuel-nu%C3%B1ez-5a5aa5350/?isSelfProfile=true" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://www.youtube.com/@manuelnunez4778" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="https://github.com/thublankitohd-rgb" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://wa.me/18097758647" target="_blank" title="WhatsApp" class="text-success"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://www.instagram.com/manuel_nunez0405/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/manuel.nunez.203751/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+      </div>
+
+      <button class="btn-youtube" onclick="window.open('https://www.youtube.com/@manuelnunez4778','_blank')">
+        🎥 Suscríbete a mi canal
+      </button>
+
+      <hr class="my-4" style="border-color:#333;">
+      <p class="mb-0" style="color: #888; font-size: 14px;">© 2026 D Núñez Motors | Arquitectura por <span style="color: #ffd700; font-weight: bold;">Ing. Manuel A. Núñez R.</span></p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- App Logic -->
+  <script src="app.js"></script>
+  <script>
+    // Script para mostrar/ocultar el botón flotante de volver arriba
+    window.addEventListener('scroll', function() {
+      const btn = document.getElementById('backToTopBtn');
+      if (window.scrollY > 300) {
+        btn.style.display = 'flex';
+      } else {
+        btn.style.display = 'none';
+      }
+    });
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>

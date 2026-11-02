@@ -1,0 +1,184 @@
+:root {
+  --bg-dark: #090d16;
+  --card-bg: #111827;
+  --accent-gold: #ffd700;
+  --accent-cyan: #00d2ff;
+  --text-main: #f8f9fa;
+  --text-muted: #9ca3af;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+.glass-navbar {
+  background: rgba(8, 9, 13, 0.95) !important;
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 215, 0, 0.15);
+  z-index: 1030;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #ffd700, #ff9800);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.fw-black {
+  font-weight: 800;
+}
+
+.hero-banner {
+  background: radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.08), transparent 40%),
+              radial-gradient(circle at 20% 80%, rgba(0, 210, 255, 0.05), transparent 40%),
+              var(--bg-dark);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.profile-card {
+  background: rgba(17, 24, 39, 0.7);
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 215, 0, 0.4) !important;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--accent-gold);
+}
+
+.social-icons-hero a:hover {
+  transform: scale(1.2);
+  transition: transform 0.2s ease;
+}
+
+.vehicle-card {
+  background-color: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.vehicle-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 215, 0, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 215, 0, 0.1);
+}
+
+.vehicle-img-wrapper {
+  height: 200px;
+  overflow: hidden;
+  background: #000;
+}
+
+.vehicle-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.vehicle-card:hover .vehicle-img-wrapper img {
+  transform: scale(1.08);
+}
+
+footer {
+  background: linear-gradient(135deg, #05070a, #111827);
+  color: #fff;
+  padding: 50px 0 30px;
+  text-align: center;
+  margin-top: 40px;
+  border-top: 1px solid rgba(255, 215, 0, 0.15);
+  box-shadow: 0 -5px 20px rgba(0,0,0,0.3);
+}
+
+footer img.footer-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+  margin-bottom: 20px;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+footer img.footer-avatar:hover {
+  transform: scale(1.05);
+}
+
+footer h4 {
+  font-weight: 800;
+  color: var(--accent-gold);
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+footer p.bio {
+  font-size: 15px;
+  color: #d1d5db;
+  max-width: 700px;
+  margin: 0 auto 20px;
+  line-height: 1.6;
+}
+
+.tech-stack {
+  display: inline-block;
+  background: rgba(255, 215, 0, 0.08);
+  color: var(--accent-gold);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 13px;
+  margin: 4px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.tech-stack:hover {
+  background: rgba(255, 215, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.social-icons-footer {
+  margin: 20px 0;
+}
+
+.social-icons-footer a {
+  color: #fff;
+  font-size: 22px;
+  margin: 0 12px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.social-icons-footer a:hover {
+  color: var(--accent-gold);
+  transform: translateY(-4px) scale(1.1);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.btn-youtube {
+  background: linear-gradient(90deg, #ff0000, #cc0000);
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255,0,0,0.3);
+}
+
+.btn-youtube:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(255,0,0,0.5);
+}
